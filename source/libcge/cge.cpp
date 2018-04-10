@@ -23,6 +23,32 @@ bool cge::init() {
   }
 
   cge::reg::put("cge-path", path);
+
+  // Get OS information
+
+  std::string os_name="Non-Standard OS";
+  #ifdef __linux__
+    os_name = "Linux";
+  #elif  __unix || __unix__
+    os_name = "Unix";
+  #elif  __FreeBSD__
+    os_name = "FreeBSD";
+  #elif __APPLE || __MACH__
+    os_name = "Mac OSX";
+  #elif _Win32
+    os_name = "Windows 32-Bit";
+  #elif _Win64
+    os_name = "Windows 64-Bit";
+  #endif
+
+  cge::reg::put("os-name", os_name);
+
+  std::string os_arch="x86_64";
+  #if defined(_M_IX86) || defined(__i386__)
+    os_arch = "x86";
+  #endif
+  
+  cge::reg::put("os-arch", os_arch);
   
   return true;
 }

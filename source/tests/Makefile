@@ -5,7 +5,7 @@ BIN  =cgetester
 all: $(OUT)/$(BIN)
 
 $(OUT)/$(BIN): $(OBJS)
-	$(CXX) $(CXXFLAGS) $(OBJS) -L$(OUT) -lcge -lcgevid -o $(OUT)/$(BIN)
+	$(CXX) $(CXXFLAGS) $(OBJS) -L$(OUT) -lcge -lcgevid -lSDL2 -o $(OUT)/$(BIN)
 	@echo -e "["$(BIN)"]" "\e[32mSUCCESS\e[0m"
 
 %.o: %.cpp

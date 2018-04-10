@@ -11,6 +11,9 @@ int main(int argc, char *argv[]) {
 
   std::cout<<"CGE base\n";
   test_cge_base();
+
+  std::cout<<"CGE video\n";
+  test_cge_vid();
   
   return 0;
 }

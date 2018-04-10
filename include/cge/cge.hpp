@@ -5,6 +5,8 @@
 #include <vector>
 #include <initializer_list>
 
+#include "cgevid.hpp"
+
 enum cge_reg_enums {
   CGE_REG_FAILED=0,
   CGE_REG_ADDED=1,
