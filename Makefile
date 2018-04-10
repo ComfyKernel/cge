@@ -37,3 +37,6 @@ src:
 
 runtest:
 	LD_LIBRARY_PATH=$(OUT) $(OUT)/cgetester
+
+clean:
+	rm $(shell find -name "*.so" -type f) $(shell find -name "*.o"  -type f)
