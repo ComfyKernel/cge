@@ -1,5 +1,53 @@
 #include <cge/cge.hpp>
 
+#include <iostream>
+#ifndef WINDOWS
+  #include <unistd.h>
+  #define get_current_dir getcwd
+#else
+  #include <direct.h>
+  #define get_current_dir _getcwd
+#endif
+
+//               // ############################################################################ //
+// CGE Functions // ############################################################################ //
+//               // ############################################################################ //
+
+bool cge::init() {
+  // Add a status to the registry which tells the program we are running
+  cge::reg::put("cge-active","true");
+
+  // Set up error handling registry options
+  cge::reg::put("cge-error-status","false");
+  cge::reg::put("cge-error-message","NO-ERROR");
+
+  // Get the current working path and error out if we can't get it
+  char c_current_path[FILENAME_MAX];
+  if(!get_current_dir(c_current_path, sizeof(c_current_path))) {
+    std::cout<<"["<<__FILE__<<":"<<__LINE__<<"] Failed to get current working directory!\n";
+    
+    cge::reg::put("cge-error-status","true");
+    cge::reg::put("cge-error-message","Failed to get the working directory from 'getcwd'");
+    return false;
+  }
+  c_current_path[sizeof(c_current_path) - 1] = '\0';
+
+  // Put the path in a temporary string so we can check for a '/' and add one if missing
+  std::string path = c_current_path;
+
+  if(path[path.size() - 1] != '/') {
+    path += '/';
+  }
+
+  cge::reg::put("cge-path", path);
+  
+  return true;
+}
+
+//              // ############################################################################ //
+// CGE Registry // ############################################################################ //
+//              // ############################################################################ //
+
 std::vector<std::string> _cge_reg_values={
   // Used for unknown names when calling *get* //
   "UNKNOWN",

@@ -13,6 +13,16 @@ enum cge_reg_enums {
 
 namespace cge {
   //
+  //             CGE Functions
+  // init()
+  // - puts values in the registry and starts SDL2
+  // quit()
+  // - quits SDL2 and cleans up
+
+  bool init();
+  bool quit();
+  
+  //
   //             CGE Registry
   // Store strings and take them back out
   //
