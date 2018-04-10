@@ -5,7 +5,7 @@ LIB  =libcge.so
 all: $(OUT)/$(LIB)
 
 $(OUT)/$(LIB): $(OBJS)
-	$(CXX) $(CXXFLAGS) -fPIC -shared $(OBJS) -o $(OUT)/$(LIB)
+	$(CXX) $(CXXFLAGS) -fPIC -shared $(OBJS) -lstdc++fs -o $(OUT)/$(LIB)
 	@echo -e "["$(LIB)"]" "\e[32mSUCCESS\e[0m"
 
 %.o: %.cpp
