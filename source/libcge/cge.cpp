@@ -11,7 +11,7 @@ std::vector<std::string> _cge_reg_values={
   "cge-author"       , "ComfyKernel"
 };
 
-const std::string& cge::registry::get(const std::string& name) {
+const std::string& cge::reg::get(const std::string& name) {
   // This iterates through all the strings and it returns
   // if there is a match AND if it is also a name and not a value ((i+1)%2),
   // the -1 offset is for the "UNKNOWN" value at the start of the array.
@@ -26,8 +26,12 @@ const std::string& cge::registry::get(const std::string& name) {
   return _cge_reg_values[0];
 }
 
-unsigned int cge::registry::put(const std::string& name, const std::string& value) {
-  // Because everything is copied to the registry references are only used to "speed it up"
+unsigned int cge::reg::put(const std::string& name, const std::string& value) {
+  // First loop through the values and find a matching name, if found,
+  // replace the string in the registry, if not found, add a new string
+  // into the registry
+
+  if(name == "UNKNOWN") return CGE_REG_FAILED; // Special case, stub for reserved names
   
   for(unsigned int i=0;i<_cge_reg_values.size();++i) {
     if(_cge_reg_values[i] == name && (i+1)%2 == 0) {
@@ -37,10 +41,33 @@ unsigned int cge::registry::put(const std::string& name, const std::string& valu
     }
   }
 
-  if(name == "UNKNOWN") return CGE_REG_FAILED; // Special case, stub for reserved names
-
   _cge_reg_values.push_back(name);
   _cge_reg_values.push_back(value);
   
   return CGE_REG_ADDED;
+}
+
+std::string cge::reg::format(const std::string& str_in, const std::initializer_list<std::string>& vals) {
+  // Check for '*' in a string and format registry variables in it as needed
+  
+  std::string out="";
+  unsigned int off=0;
+  
+  for(auto i : str_in) {
+    if(i == '*') {
+      if(off>=vals.size()) {
+	// Keep repeating the last value so we don't drop off the array
+	off-=1;
+      }
+      
+      out+=get(vals.begin()[off]);
+      off+=1;
+      
+      continue;
+    }
+
+    out+=i;
+  }
+
+  return out;
 }

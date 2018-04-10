@@ -14,7 +14,7 @@ void test_grabbed(const std::string& str) {
 
 const std::string& test_get(const std::string& name) {
   std::cout<<"Getting string '"<<name<<"'";
-  return cge::registry::get(name);
+  return cge::reg::get(name);
 }
 
 void test_cge_base() {
@@ -25,7 +25,15 @@ void test_cge_base() {
   
   std::cout<<"Testing registry values\n";
   std::cout<<"Using CGE Version "
-	   <<cge::registry::get("cge-version-major")<<"."
-	   <<cge::registry::get("cge-version-minor")<<"-"
-	   <<cge::registry::get("cge-version-flair")<<"\n";
+	   <<cge::reg::get("cge-version-major")<<"."
+	   <<cge::reg::get("cge-version-minor")<<"-"
+	   <<cge::reg::get("cge-version-flair")<<"\n";
+  std::cout<<"Clearly Unknown : "<<cge::reg::get("this-value-shouldnt-exist-lol")<<"\n";
+
+  std::cout<<"Testing string formater\n";
+  std::cout<<cge::reg::format("Using CGE Version *.*-*\n",
+			      {"cge-version-major",
+			       "cge-version-minor",
+			       "cge-version-flair"});
+  std::cout<<cge::reg::format("Clearly Unknown : *\n",{"this-value-shouldnt-exist-lol"});
 }

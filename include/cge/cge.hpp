@@ -3,6 +3,7 @@
 
 #include <string>
 #include <vector>
+#include <initializer_list>
 
 enum cge_reg_enums {
   CGE_REG_FAILED=0,
@@ -23,14 +24,17 @@ namespace cge {
   // - it just grabs everything in a (name:value) format
   // exists()
   // - tests for a string and returns a value
-  //
+  // format()
+  // - formats a string by replacing '*' with registry values
   
-  namespace registry {
+  namespace reg {
     const std::string& get(const std::string&);
     unsigned int       put(const std::string&, const std::string&);
 
     const std::vector<std::string>& all();
     bool exists(const std::string&);
+
+    std::string format(const std::string&,const std::initializer_list<std::string>&);
   }
 }
 
