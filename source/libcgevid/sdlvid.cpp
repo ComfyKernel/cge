@@ -1,5 +1,5 @@
-#include <cge/cge.hpp>
-#include <cge/cgevid.hpp>
+#include <cge/reg.hpp>
+#include <cge/vid.hpp>
 
 #include <string>
 #include <SDL2/SDL.h>

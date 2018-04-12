@@ -78,4 +78,11 @@ void test_cge_base() {
   std::cout<<reg::format("OS Name : *\nOS Architecture : *\n",
 			 {"os-name",
 			  "os-arch"});
+
+  std::cout<<"\nTesting Logging\n";
+  log::log ("Test out from log\n");
+  log::log ("The next string should be cut off\n");
+  log::logp("You shouldn't see this whole message", 0, 8);
+  log::log ("\n");
+  log::logf("Using CGE Version %*.%*-%*\n", "cge-version-major","cge-version-minor","cge-version-flair");
 }

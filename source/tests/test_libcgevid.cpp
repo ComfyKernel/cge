@@ -4,7 +4,8 @@
 
 #include <SDL/SDL.h>
 
-#include <cge/cge.hpp>
+#include <cge/vid.hpp>
+#include <cge/reg.hpp>
 
 using namespace cge;
 
