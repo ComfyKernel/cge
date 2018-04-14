@@ -128,3 +128,7 @@ std::string cge::reg::format(const std::string& str_in, const std::initializer_l
 
   return out;
 }
+
+const std::vector<std::string>& cge::reg::all() {
+  return _cge_reg_values;
+}

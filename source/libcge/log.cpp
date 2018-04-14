@@ -62,8 +62,14 @@ void log::logf(const std::string& s_base, ...) {
       case '*':
 	log(reg::get(va_arg(vargs, char*)));
 	continue;
+      case '&':
+	log(reg::get(va_arg(vargs, std::string)));
+	continue;
       case 's':
 	log(va_arg(vargs, char*));
+	continue;
+      case 'S':
+	log(va_arg(vargs, std::string));
 	continue;
       case 'd':
 	log(std::to_string(va_arg(vargs, int)));

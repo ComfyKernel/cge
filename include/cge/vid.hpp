@@ -6,18 +6,19 @@
 namespace cge {
   namespace vid {
     bool init();
-    bool quit();
+    void quit();
 
     class window {
     protected:
       void* handle;
+      void* gl_handle;
       bool _isopen;
       
     public:
       window();
-      window(int,int,unsigned int,unsigned int,const std::string&);
+      window(int,int,unsigned int,unsigned int,const std::string&,const std::string&);
 
-      bool create(int,int,unsigned int,unsigned int,const std::string&);
+      bool create(int,int,unsigned int,unsigned int,const std::string&,const std::string&);
       void close ();
       
       int x();

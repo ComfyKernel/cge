@@ -85,4 +85,18 @@ void test_cge_base() {
   log::logp("You shouldn't see this whole message", 0, 8);
   log::log ("\n");
   log::logf("Using CGE Version %*.%*-%*\n", "cge-version-major","cge-version-minor","cge-version-flair");
+
+  std::cout<<"\nTesting Logging, But with a file\n";
+  log::file(reg::get("cge-path")+"cgetest.log");
+  log::log ("The next string should be cut off\n");
+  log::logp("You shouldn't see this whole message", 0, 8);
+  log::log ("\n");
+  log::logf("Using CGE Version %*.%*-%*\n", "cge-version-major","cge-version-minor","cge-version-flair");
+
+  if(reg::get("cge-error-status")=="true") {
+    log::logf("CGE Error : %*\n", "cge-error-message");
+    die(__LINE__, "Failed to open log file");
+  }
+
+  log::log("Using file logging for the rest of the tests");
 }

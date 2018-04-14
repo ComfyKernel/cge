@@ -10,3 +10,4 @@ tramp
 *.so
 *.a
 cgetester
+*.log
